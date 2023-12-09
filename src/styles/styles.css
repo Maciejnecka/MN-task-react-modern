@@ -1,3 +1,90 @@
-body {
-    background-color: #fefefe;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
+
+.column {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 10px;
+    width: 200px;
+    background-color: #f9f9f9;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.column__title {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.column__info {
+    font-size: 14px;
+    color: #555;
+}
+
+.column__count {
+    font-weight: bold;
+}
+
+.task {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #fff;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.task__name {
+    margin-bottom: 5px;
+}
+
+.task__move-btn {
+    background-color: #4caf50;
+    color: #fff;
+    width: 100%;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    margin: 5px 0px;
+    transition: all 0.5s;
+}
+
+.task__move-btn:hover {
+    background-color: #3c893f;
+}
+
+.btn--abandon {
+    background-color: #ff5733;
+    color: white;
+}
+.btn--abandon:hover {
+    background-color: #d9534f;
+}
+
+.btn--finish {
+    background-color: #3498db;
+    color: white;
+}
+.btn--finish:hover {
+    background-color: #2e6da4;
+}
+
+.btn--remove {
+    background-color: #e74c3c;
+    color: white;
+}
+.btn--remove:hover {
+    background-color: #c0392b;
+}
+
+/* Add more styling as needed */

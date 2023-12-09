@@ -7,9 +7,17 @@ function Column({ column }) {
     const { tasks } = useAppContext();
     const tasksInColumn = tasks.filter((task) => task.idColumn === column.id);
 
+    const tasksCount = tasksInColumn.length;
+    const maxLimit = column.limit;
+
     return (
         <div className="column">
-            <h2>{column.name}</h2>
+            <h2 className="column__title">{column.name}</h2>
+            <div className="column__info">
+                <span className="column__count">
+                    {tasksCount}/{maxLimit} slots taken
+                </span>
+            </div>
             {tasksInColumn.map((task) => (
                 <Task key={task.id} task={task} />
             ))}

@@ -4,9 +4,9 @@ import React, { createContext, useContext } from 'react';
 import useStorage from './useStorage';
 
 const initialColumns = [
-    { id: 1, name: 'Pending', limit: 4 },
-    { id: 2, name: 'Analysis - Doing', limit: 3 },
-    { id: 3, name: 'Analysis - Done', limit: 2 },
+    { id: 1, name: 'To do', limit: 5 },
+    { id: 2, name: 'Doing', limit: 2 },
+    { id: 3, name: 'Done', limit: 10 },
 ];
 
 const initialTasks = [
