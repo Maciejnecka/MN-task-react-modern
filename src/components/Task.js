@@ -25,8 +25,12 @@ function Task({ task }) {
     };
 
     const handleRemoveTask = () => {
-        const updatedTasks = tasks.filter((t) => t.id !== task.id);
-        setTasks(updatedTasks);
+        // eslint-disable-next-line
+        const isConfirmed = window.confirm('Are you sure you want to remove task?');
+        if (isConfirmed) {
+            const updatedTasks = tasks.filter((t) => t.id !== task.id);
+            setTasks(updatedTasks);
+        }
     };
 
     return (
