@@ -4,17 +4,16 @@ import React, { createContext, useContext } from 'react';
 import useStorage from './useStorage';
 
 const initialColumns = [
-    { id: 1, name: 'To do', limit: 5 },
+    { id: 1, name: 'To do', limit: 10 },
     { id: 2, name: 'Doing', limit: 2 },
     { id: 3, name: 'Done', limit: 10 },
 ];
+export const todoLimit = initialColumns[0].limit;
 
 const initialTasks = [
     { id: 1, name: 'Task1', idColumn: 1, user: 'Anna', createdAt: new Date() },
     { id: 2, name: 'Task2', idColumn: 1, user: 'Basia', createdAt: new Date() },
     { id: 3, name: 'Task3', idColumn: 1, user: 'Tomek', createdAt: new Date() },
-    { id: 4, name: 'Task4', idColumn: 1, user: 'Bartek', createdAt: new Date() },
-    { id: 5, name: 'Task5', idColumn: 1, user: 'Alicja', createdAt: new Date() },
 ];
 
 const AppContext = createContext();
