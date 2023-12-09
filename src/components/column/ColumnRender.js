@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import Task from './Task';
+import Task from '../task/Task';
 
 function ColumnRender({ column, tasksCount, maxLimit, tasksInColumn }) {
     return (

@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { useAppContext } from './App';
+import { useAppContext } from '../app/App';
 import TaskRender from './TaskRender';
 
 function Task({ task }) {

@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { useAppContext } from './App';
+import { useAppContext } from '../app/App';
 import ColumnRender from './ColumnRender';
 
 function Column({ column }) {

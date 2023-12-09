@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
-import { useAppContext, todoLimit } from './App';
+import { useAppContext, todoLimit } from '../app/App';
 import FormRender from './FormRender';
-import FormValidate from './FormValidate';
+import FormValidate from '../column/FormValidate';
 
 function Form() {
     const { setTasks, tasks } = useAppContext();
