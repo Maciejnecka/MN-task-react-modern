@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { useAppContext, todoLimit } from './App';
+import FormRender from './FormRender';
+import FormValidate from './FormValidate';
 
 function Form() {
     const { setTasks, tasks } = useAppContext();
@@ -10,33 +12,12 @@ function Form() {
     const [userError, setUserError] = useState('');
 
     const handleAddTask = () => {
-        if (taskName.trim() === '' || user.trim() === '') {
-            setTaskNameError('Field is required!');
-            setUserError('Field is required!');
+        const isValid = FormValidate(taskName, user, setTaskNameError, setUserError, tasks, setTasks, todoLimit);
+
+        if (!isValid) {
             return;
         }
-        const todoTasks = tasks.filter((task) => task.idColumn === 1);
-        if (todoTasks.length >= todoLimit) {
-            // eslint-disable-next-line
-            alert('To do column limit reached. Cannot add more tasks.');
-            setTaskName('');
-            setUser('');
-            return;
-        }
-        setTaskNameError('');
-        setUserError('');
 
-        const newTaskId = tasks.length > 0 ? Math.max(...tasks.map((task) => task.id)) + 1 : 1;
-
-        const newTask = {
-            id: newTaskId,
-            name: taskName,
-            idColumn: 1,
-            user,
-            createdAt: new Date(),
-        };
-
-        setTasks((prevTasks) => [...prevTasks, newTask]);
         setTaskName('');
         setUser('');
     };
@@ -45,36 +26,27 @@ function Form() {
         e.preventDefault();
         handleAddTask();
     };
+
+    const handleTaskNameChange = (value) => {
+        setTaskName(value);
+        setTaskNameError('');
+    };
+
+    const handleUserChange = (value) => {
+        setUser(value);
+        setUserError('');
+    };
+
     return (
-        <form className="form" onSubmit={handleSubmit}>
-            <input
-                type="text"
-                placeholder="Enter task name"
-                value={taskName}
-                onChange={(e) => {
-                    setTaskName(e.target.value);
-                    setTaskNameError('');
-                }}
-                className="form__input form__input--task"
-            />
-            {taskNameError && <div className="form__input--error">{taskNameError}</div>}
-
-            <input
-                type="text"
-                placeholder="Enter user"
-                value={user}
-                onChange={(e) => {
-                    setUser(e.target.value);
-                    setUserError('');
-                }}
-                className="form__input form__input--user"
-            />
-            {userError && <div className="form__input--error">{userError}</div>}
-
-            <button type="submit" className="form__button">
-                Add Task
-            </button>
-        </form>
+        <FormRender
+            taskName={taskName}
+            user={user}
+            taskNameError={taskNameError}
+            userError={userError}
+            handleSubmit={handleSubmit}
+            handleTaskNameChange={handleTaskNameChange}
+            handleUserChange={handleUserChange}
+        />
     );
 }
 

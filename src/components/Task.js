@@ -2,6 +2,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { useAppContext } from './App';
+import TaskRender from './TaskRender';
 
 function Task({ task }) {
     const { setTasks, tasks, columns } = useAppContext();
@@ -9,18 +10,27 @@ function Task({ task }) {
     const columnIndex = columns.findIndex((col) => col.id === task.idColumn);
     const currentColumn = columns[columnIndex];
 
+    function updateTaskColumn(updatedTasks) {
+        setTasks(updatedTasks);
+    }
+
+    function isColumnLimitNotExceeded(newColumnIndex) {
+        const targetColumn = columns[newColumnIndex];
+        return targetColumn.limit > tasks.filter((t) => t.idColumn === targetColumn.id).length;
+    }
+
     const handleMoveTask = (direction) => {
         const newColumnIndex = columnIndex + direction;
 
-        if (
-            columns[newColumnIndex] &&
-            columns[newColumnIndex].limit > tasks.filter((t) => t.idColumn === columns[newColumnIndex].id).length
-        ) {
+        if (columns[newColumnIndex] && isColumnLimitNotExceeded(newColumnIndex)) {
             const updatedTasks = tasks.map((t) =>
                 t.id === task.id ? { ...t, idColumn: columns[newColumnIndex].id } : t,
             );
-
-            setTasks(updatedTasks);
+            updateTaskColumn(updatedTasks);
+        } else {
+            const targetColumn = columns[newColumnIndex];
+            // eslint-disable-next-line
+            alert(`${targetColumn.name} column is full. Cannot move the task.`);
         }
     };
 
@@ -32,44 +42,13 @@ function Task({ task }) {
             setTasks(updatedTasks);
         }
     };
-
     return (
-        <div className="task">
-            <div className="task__date-container">
-                <p className="task__date">
-                    {new Date(task.createdAt).toLocaleDateString([], {
-                        day: '2-digit',
-                        month: '2-digit',
-                        year: '2-digit',
-                    })}
-                </p>
-                <p className="task__time">
-                    {new Date(task.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                </p>
-            </div>
-            <p className="task__name">Task: {task.name}</p>
-            <p className="task__author">User: {task.user}</p>
-            {currentColumn.name === 'To do' && (
-                <button className="task__move-btn" type="button" onClick={() => handleMoveTask(1)}>
-                    Begin task
-                </button>
-            )}
-            {currentColumn.id === 2 && (
-                <>
-                    <button className="task__move-btn btn--abandon" type="button" onClick={() => handleMoveTask(-1)}>
-                        Abandon the task
-                    </button>
-                    <button className="task__move-btn btn--finish" type="button" onClick={() => handleMoveTask(1)}>
-                        Finish task
-                    </button>
-                </>
-            )}
-            {currentColumn.name === 'Done' && (
-                <button className="task__move-btn btn--remove" type="button" onClick={handleRemoveTask}>
-                    Remove task
-                </button>
-            )}
-        </div>
+        <TaskRender
+            task={task}
+            handleMoveTask={handleMoveTask}
+            handleRemoveTask={handleRemoveTask}
+            currentColumn={currentColumn}
+        />
     );
 }
 
