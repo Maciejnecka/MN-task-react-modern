@@ -35,7 +35,12 @@ function Task({ task }) {
 
     return (
         <div className="task">
-            <p className="task__name">{task.name}</p>
+            <div className="task__date-container">
+                <p className="task__date">{new Date(task.createdAt).toLocaleDateString()}</p>
+                <p className="task__time">{new Date(task.createdAt).toLocaleTimeString()}</p>
+            </div>
+            <p className="task__name">Task: {task.name}</p>
+            <p className="task__author">User: {task.user}</p>
             {currentColumn.name === 'To do' && (
                 <button className="task__move-btn" type="button" onClick={() => handleMoveTask(1)}>
                     Begin task

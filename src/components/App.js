@@ -10,11 +10,11 @@ const initialColumns = [
 ];
 
 const initialTasks = [
-    { id: 1, name: 'Task1', idColumn: 1, user: 'Anna' },
-    { id: 2, name: 'Task2', idColumn: 1, user: 'Basia' },
-    { id: 3, name: 'Task3', idColumn: 1, user: 'Tomek' },
-    { id: 4, name: 'Task4', idColumn: 1, user: 'Bartek' },
-    { id: 5, name: 'Task5', idColumn: 1, user: 'Alicja' },
+    { id: 1, name: 'Task1', idColumn: 1, user: 'Anna', createdAt: new Date() },
+    { id: 2, name: 'Task2', idColumn: 1, user: 'Basia', createdAt: new Date() },
+    { id: 3, name: 'Task3', idColumn: 1, user: 'Tomek', createdAt: new Date() },
+    { id: 4, name: 'Task4', idColumn: 1, user: 'Bartek', createdAt: new Date() },
+    { id: 5, name: 'Task5', idColumn: 1, user: 'Alicja', createdAt: new Date() },
 ];
 
 const AppContext = createContext();
