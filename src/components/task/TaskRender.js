@@ -19,9 +19,14 @@ function TaskRender({ task, handleMoveTask, handleRemoveTask, currentColumn }) {
             <p className="task__name">Task: {task.name}</p>
             <p className="task__author">User: {task.user}</p>
             {currentColumn.name === 'To do' && (
-                <button className="task__move-btn" type="button" onClick={() => handleMoveTask(1)}>
-                    Begin task
-                </button>
+                <div className="task__buttons btn__container">
+                    <button className="task__move-btn" type="button" onClick={() => handleMoveTask(1)}>
+                        Begin task
+                    </button>
+                    <button className="task__remove-btn" type="button" onClick={handleRemoveTask}>
+                        X
+                    </button>
+                </div>
             )}
             {currentColumn.id === 2 && (
                 <>

@@ -109,18 +109,19 @@
     margin-top: -5px;
 }
 
-.task__date {
-}
-
-.task__time {
-}
-
 .task__name {
     margin-bottom: 5px;
     align-self: flex-start;
 }
 .task__author {
     align-self: flex-start;
+}
+
+.btn__container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .task__move-btn {
@@ -161,6 +162,20 @@
     color: white;
 }
 .btn--remove:hover {
+    background-color: #c0392b;
+}
+
+.task__remove-btn {
+    background-color: #e74c3c;
+    color: white;
+    cursor: pointer;
+    border: none;
+    width: 20px;
+    height: 17px;
+    border-radius: 4px;
+    margin-left: 15px;
+}
+.task__remove-btn:hover {
     background-color: #c0392b;
 }
 /* //////////////////////////////////////////////////////////////// */
