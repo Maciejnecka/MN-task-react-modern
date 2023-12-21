@@ -1,11 +1,13 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useState } from 'react';
 import { useAppContext } from '../app/App';
 import TaskRender from './TaskRender';
 
 function Task({ task }) {
     const { setTasks, tasks, columns } = useAppContext();
+    const [infoMessage, setInfoMessage] = useState(null);
+    const [isConfirmationVisible, setIsConfirmationVisible] = useState(false);
 
     const columnIndex = columns.findIndex((col) => col.id === task.idColumn);
     const currentColumn = columns[columnIndex];
@@ -29,26 +31,57 @@ function Task({ task }) {
             updateTaskColumn(updatedTasks);
         } else {
             const targetColumn = columns[newColumnIndex];
-            // eslint-disable-next-line
-            alert(`${targetColumn.name} column is full. Cannot move the task.`);
+            setInfoMessage(`${targetColumn.name} column is full. Cannot move the task.`);
+
+            setTimeout(() => {
+                setInfoMessage(null);
+            }, 3000);
         }
     };
 
-    const handleRemoveTask = () => {
-        // eslint-disable-next-line
-        const isConfirmed = window.confirm('Are you sure you want to remove task?');
-        if (isConfirmed) {
-            const updatedTasks = tasks.filter((t) => t.id !== task.id);
-            setTasks(updatedTasks);
-        }
+    const handleConfirmRemove = () => {
+        const updatedTasks = tasks.filter((t) => t.id !== task.id);
+        setTasks(updatedTasks);
+        setIsConfirmationVisible(false);
     };
+
+    const handleRemoveTask = () => {
+        setIsConfirmationVisible(true);
+    };
+
+    const handleCancelRemove = () => {
+        setIsConfirmationVisible(false);
+    };
+
     return (
-        <TaskRender
-            task={task}
-            handleMoveTask={handleMoveTask}
-            handleRemoveTask={handleRemoveTask}
-            currentColumn={currentColumn}
-        />
+        <>
+            {infoMessage && <div className="info-message">{infoMessage}</div>}
+            <TaskRender
+                task={task}
+                handleMoveTask={handleMoveTask}
+                handleRemoveTask={handleRemoveTask}
+                currentColumn={currentColumn}
+            />
+            {isConfirmationVisible && (
+                <div className="confirmation-modal">
+                    <p className="confirmation-modal__message">Are you sure you want to remove the task?</p>
+                    <button
+                        className="confirmation-modal__button confirmation-modal__button--confirm"
+                        type="button"
+                        onClick={handleConfirmRemove}
+                    >
+                        Yes
+                    </button>
+                    <button
+                        className="confirmation-modal__button confirmation-modal__button--cancel"
+                        type="button"
+                        onClick={handleCancelRemove}
+                    >
+                        No
+                    </button>
+                </div>
+            )}
+        </>
     );
 }
 
