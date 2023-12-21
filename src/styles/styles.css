@@ -13,7 +13,7 @@
 .form {
     display: flex;
     flex-direction: column;
-    margin: 10px auto;
+    margin: 40px auto;
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 10px;
@@ -224,4 +224,19 @@
 .confirmation-modal__button--cancel:hover {
     background-color: #b43b2e;
 }
+
+.form--alert {
+    position: fixed;
+    top: 0; /* Adjust the top position as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    background-color: #f44336;
+    color: white;
+    padding: 15px;
+    margin-bottom: 15px;
+    width: 100%;
+    z-index: 999; /* Adjust the z-index to make sure it appears above other elements */
+}
+
 /* //////////////////////////////////////////////////////////////// */

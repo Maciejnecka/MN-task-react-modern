@@ -10,9 +10,19 @@ function Form() {
     const [user, setUser] = useState('');
     const [taskNameError, setTaskNameError] = useState('');
     const [userError, setUserError] = useState('');
+    const [showAlert, setShowAlert] = useState(false);
 
     const handleAddTask = () => {
-        const isValid = formValidate(taskName, user, setTaskNameError, setUserError, tasks, setTasks, todoLimit);
+        const isValid = formValidate(
+            taskName,
+            user,
+            setTaskNameError,
+            setUserError,
+            tasks,
+            setTasks,
+            todoLimit,
+            setShowAlert,
+        );
 
         if (!isValid) {
             return;
@@ -37,16 +47,39 @@ function Form() {
         setUserError('');
     };
 
+    const handleAlertClick = () => {
+        setShowAlert(false);
+    };
+
+    const handleAlertKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            setShowAlert(false);
+        }
+    };
+
     return (
-        <FormRender
-            taskName={taskName}
-            user={user}
-            taskNameError={taskNameError}
-            userError={userError}
-            handleSubmit={handleSubmit}
-            handleTaskNameChange={handleTaskNameChange}
-            handleUserChange={handleUserChange}
-        />
+        <>
+            {showAlert && (
+                <div
+                    className="form--alert"
+                    onClick={handleAlertClick}
+                    onKeyDown={handleAlertKeyDown}
+                    tabIndex={0}
+                    role="button"
+                >
+                    To do column limit reached. Cannot add more tasks. Click to close.
+                </div>
+            )}
+            <FormRender
+                taskName={taskName}
+                user={user}
+                taskNameError={taskNameError}
+                userError={userError}
+                handleSubmit={handleSubmit}
+                handleTaskNameChange={handleTaskNameChange}
+                handleUserChange={handleUserChange}
+            />
+        </>
     );
 }
 
