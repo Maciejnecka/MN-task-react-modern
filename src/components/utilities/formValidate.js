@@ -1,4 +1,4 @@
-const FormValidate = (taskName, user, setTaskNameError, setUserError, tasks, setTasks, todoLimit) => {
+const formValidate = (taskName, user, setTaskNameError, setUserError, tasks, setTasks, todoLimit) => {
     if (taskName.trim() === '' || user.trim() === '') {
         setTaskNameError('Field is required!');
         setUserError('Field is required!');
@@ -28,4 +28,4 @@ const FormValidate = (taskName, user, setTaskNameError, setUserError, tasks, set
     setTasks((prevTasks) => [...prevTasks, newTask]);
     return true;
 };
-export default FormValidate;
+export default formValidate;

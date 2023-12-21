@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useAppContext, todoLimit } from '../app/App';
 import FormRender from './FormRender';
-import FormValidate from '../column/FormValidate';
+import formValidate from '../utilities/formValidate';
 
 function Form() {
     const { setTasks, tasks } = useAppContext();
@@ -12,7 +12,7 @@ function Form() {
     const [userError, setUserError] = useState('');
 
     const handleAddTask = () => {
-        const isValid = FormValidate(taskName, user, setTaskNameError, setUserError, tasks, setTasks, todoLimit);
+        const isValid = formValidate(taskName, user, setTaskNameError, setUserError, tasks, setTasks, todoLimit);
 
         if (!isValid) {
             return;
